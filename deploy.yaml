@@ -1,0 +1,11 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-java-spring-sdk-deploy
+spec:
+  steps:
+    # TODO: Need to replicate for each function
+    # - name: "Cloud Build and upload container"
+    #  exec: "gcloud builds submit funks/{{.LowerFunkName}} --tag $KO_DOCKER_REPO/{{.LowerFunkName}}"
+    - name: "Build Functions and Deploy Functions/Triggers"
+      exec: "ko apply -f config"

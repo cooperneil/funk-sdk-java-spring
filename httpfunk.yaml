@@ -1,0 +1,35 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-java-spring-sdk
+spec:
+  steps:
+    - name: "Creating main directory"
+      mkdir: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks"    
+    - name: "Creating resource directory"
+      mkdir: "funks/{{.LowerFunkName}}/src/main/resources"    
+    # TODO: remove Dockerfile and .dockerignore once buildpacks integrated
+    - name: "Create Dockerfile"
+      template:
+        source: "templates/funk/Dockerfile.tmpl"
+        dest: "funks/{{.LowerFunkName}}/Dockerfile"
+    - name: "Create .dockerignore"
+      template:
+        source: "templates/funk/dockerignore.tmpl"
+        dest: "funks/{{.LowerFunkName}}/.dockerignore" 
+    - name: "Create pom.xml"
+      template:
+        source: "templates/funk/pom.xml.tmpl"
+        dest: "funks/{{.LowerFunkName}}/pom.xml"
+    - name: "Create application properties"
+      template:
+        source: "templates/funk/application.properties.tmpl"
+        dest: "funks/{{.LowerFunkName}}/src/main/resources/application.properties"
+    - name: "Create http funk"
+      template:
+        source: "templates/funk/funk.java.tmpl"
+        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Application.java"              
+    - name: "Create service yaml"
+      template:
+        source: "templates/funk/service.yaml"
+        dest: "config/{{.LowerFunkName}}_service.yaml"

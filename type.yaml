@@ -1,0 +1,8 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: Type
+metadata:
+  name: funk-java-spring-sdk
+spec:
+  template:
+    source: "templates/type/type.java.tmpl"
+    dest: "funks/{{.LowerFunkName}}/src/main/java/{{.Path}}/{{.UpCaseTypeName}}.java"

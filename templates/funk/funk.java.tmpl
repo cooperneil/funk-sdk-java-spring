@@ -1,0 +1,29 @@
+package com.example.funks;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+public class {{.FunkName}}Application {
+
+	@Value("${TARGET:from {{.FunkName}} in Java Spring}")
+	String target;
+
+	@RestController
+	class {{.FunkName}}Controller {
+
+		@GetMapping("/")
+		String hello() {
+			// TODO(you): make stuff happen here!
+
+			return "Hello " + target + "!";
+		}
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run({{.FunkName}}Application.class, args);
+	}
+}

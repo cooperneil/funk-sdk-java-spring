@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: funk-{{.LowerFunkName}} # The name of the app
+  namespace: default # The namespace the app will use
+  labels:
+    funk.knative.dev/function: {{.LowerFunkName}}
+spec:
+  template:
+    metadata:
+      labels:
+        funk.knative.dev/function: {{.LowerFunkName}}
+    spec:
+      containers:
+        # TODO: - image: $KO_DOCKER_REPO/{{.LowerFunkName}}
+        - image: us.gcr.io/neilcooper-knative-dev2/{{.LowerFunkName}}
+ 

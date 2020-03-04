@@ -1,0 +1,14 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-java-spring-sdk
+spec:
+  steps:
+    - name: "Create config directory"
+      mkdir: "config"
+    - name: "Create funks directory"
+      mkdir: "funks"
+    - name: "Create README.md"
+      template:
+        source: "templates/init/README.md"
+        dest: "README.md"
