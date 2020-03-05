@@ -1,0 +1,19 @@
+package com.example.funks;
+
+import java.util.Map;
+import java.util.logging.Logger;
+
+import {{.InType.PathDots}}.{{.InType.UpCaseTypeName}};
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class {{.FunkName}}Function {
+    private static final Logger logger = Logger.getLogger({{.FunkName}}Function.class.getName());
+
+    public void onEvent({{.InType.UpCaseTypeName}} event, Map<String, String> cloudEventHeaders) {
+        logger.info("Received {{.InType.UpCaseTypeName}} event: " + event);
+
+        // TODO(you): process the event!
+    }
+}

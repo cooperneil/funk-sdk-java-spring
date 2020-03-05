@@ -4,7 +4,7 @@ metadata:
   name: funk-java-spring-sdk
 spec:
   template:
-    # TODO .LowerFunkName is not provided
     source: "templates/type/type.java.tmpl"
+    # TODO: LowerFunkName is not provided yet. Better to gen in funks/ rather than copy in deploy?
     # dest: "funks/{{.LowerFunkName}}/src/main/java/{{.Path}}/{{.UpCaseTypeName}}.java"
     dest: "types/src/main/java/{{.Path}}/{{.UpCaseTypeName}}.java"   

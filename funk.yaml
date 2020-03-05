@@ -25,10 +25,14 @@ spec:
       template:
         source: "templates/funk/application.properties.tmpl"
         dest: "funks/{{.LowerFunkName}}/src/main/resources/application.properties"
-    - name: "Create funk receiver"
+    - name: "Create event receiver"
       template:
-        source: "templates/funk/main.java.tmpl"
-        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Receiver.java"              
+        source: "templates/funk/receiver.java.tmpl"
+        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Receiver.java"
+    - name: "Create funk"
+      template:
+        source: "templates/funk/funk.java.tmpl"
+        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Function.java"
     - name: "Create service yaml"
       template:
         source: "templates/funk/service.yaml"
@@ -37,3 +41,5 @@ spec:
       template:
         source: "templates/funk/trigger.yaml"
         dest: "config/{{.LowerFunkName}}_trigger.yaml"
+    - name: "copy concrete event type"
+      exec: "cp -r types/src funks/{{.LowerFunkName}}"

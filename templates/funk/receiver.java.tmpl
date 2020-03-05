@@ -3,10 +3,10 @@ package com.example.funks;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Value;
+import {{.InType.PathDots}}.{{.InType.UpCaseTypeName}};
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -14,17 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class {{.FunkName}}Receiver {
-	private static final Logger logger =
-		Logger.getLogger({{.FunkName}}Receiver.class.getName());
+	private static final Logger logger = Logger.getLogger({{.FunkName}}Receiver.class.getName());
+
+	private final {{.FunkName}}Function funk;
+
+	public {{.FunkName}}Receiver({{.FunkName}}Function funk) {
+		this.funk = funk;
+	}
 
 	@RestController
-	class {{.FunkName}}Controller {
+	class {{.FunkName}}EventController {
 
 		@PostMapping("/")
-		String funk(@RequestHeader Map<String, String> headers, @RequestBody String jsonBody) {
-			logger.info("Received event in body: " + jsonBody);
+		void funk(@RequestBody {{.InType.UpCaseTypeName}} event, @RequestHeader Map<String, String> headers) {
+			logger.info("Invoking funk with event.\nHeaders:" + headers + "\nEvent: " + event);
 
-			return "accepted" + jsonBody;
+			// TODO: custom exception handling
+			funk.onEvent(event, headers);
 		}
 	}
 
