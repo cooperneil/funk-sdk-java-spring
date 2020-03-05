@@ -1,0 +1,34 @@
+package com.example.funks;
+
+import java.util.Map;
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+public class {{.FunkName}}Receiver {
+	private static final Logger logger =
+		Logger.getLogger({{.FunkName}}Receiver.class.getName());
+
+	@RestController
+	class {{.FunkName}}Controller {
+
+		@PostMapping("/")
+		String funk(@RequestHeader Map<String, String> headers, @RequestBody String jsonBody) {
+			logger.info("Received event in body: " + jsonBody);
+
+			return "accepted" + jsonBody;
+		}
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run({{.FunkName}}Receiver.class, args);
+	}
+}

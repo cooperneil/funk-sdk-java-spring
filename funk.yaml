@@ -25,11 +25,15 @@ spec:
       template:
         source: "templates/funk/application.properties.tmpl"
         dest: "funks/{{.LowerFunkName}}/src/main/resources/application.properties"
-    - name: "Create http funk"
+    - name: "Create funk receiver"
       template:
-        source: "templates/funk/httpfunk.java.tmpl"
-        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Application.java"              
+        source: "templates/funk/main.java.tmpl"
+        dest: "funks/{{.LowerFunkName}}/src/main/java/com/example/funks/{{.FunkName}}Receiver.java"              
     - name: "Create service yaml"
       template:
         source: "templates/funk/service.yaml"
         dest: "config/{{.LowerFunkName}}_service.yaml"
+    - name: "Create trigger yaml"
+      template:
+        source: "templates/funk/trigger.yaml"
+        dest: "config/{{.LowerFunkName}}_trigger.yaml"

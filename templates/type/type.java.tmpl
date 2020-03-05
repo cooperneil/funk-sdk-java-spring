@@ -1,0 +1,14 @@
+package {{.PathDots}};
+
+/**
+ * Generated type binding for CloudEvent type
+ * {{.CEType}}
+ *
+ * Powered by fun(k)
+ */
+public class {{.UpCaseTypeName}} {
+  {{range .StructFields}} public {{if eq .FieldType "integer"}} int {{else if eq .FieldType "string"}} String {{else}} {{.FieldType}} {{end}} {{.Name}};
+  {{end}}
+
+  // TODO javabean style accessors
+}
